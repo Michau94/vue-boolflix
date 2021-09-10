@@ -1,54 +1,30 @@
 <template>
   <div id="app">
-    <Search @search="search" />
-    <button @click="find">Cerca</button>
+    <header
+      class="container-flex d-flex align-items-center justify-content-between"
+    >
+      <h2 class="text-light">Boolflix</h2>
 
-    <!-- pseudo card  componente to be -->
+      <div class="d-flex align-items-center">
+        <Search @search="search" />
+        <button @click="find" class="my-3">Cerca</button>
+      </div>
+    </header>
 
-    <div class="card" v-for="result in searchResult" :key="result.id">
-      <h4>{{ result.title }}</h4>
-      <h5>{{ result.original_title }}</h5>
-      <h5>{{ result.original_language }}</h5>
-      <h5>{{ result.vote_average }}</h5>
-
-      <img
-        :src="
-          result.original_language == 'it' || result.original_language == 'en'
-            ? require('./assets/images/' + result.original_language + '.png')
-            : null
-        "
-        :alt="result.original_language"
-      />
-    </div>
-    <h2>TV Series</h2>
-
-    <!-- tv series result -->
-    <div class="card" v-for="serie in searchResultTv" :key="serie.id">
-      <h4>{{ serie.name }}</h4>
-      <h5>{{ serie.original_name }}</h5>
-      <h5>{{ serie.original_language }}</h5>
-      <h5>{{ serie.vote_average }}</h5>
-
-      <img
-        :src="
-          serie.original_language == 'it' || serie.original_language == 'en'
-            ? require('./assets/images/' + serie.original_language + '.png')
-            : null
-        "
-        :alt="serie.original_language"
-      />
-    </div>
+    <Content :searchResult="searchResult" :searchResultTv="searchResultTv" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Search from "./components/Search.vue";
+import Content from "./components/Content.vue";
 
 export default {
   name: "App",
   components: {
     Search,
+    Content,
   },
   data() {
     return {
@@ -67,6 +43,7 @@ export default {
       // clean page if search empty
       if (this.searchText === " " || !this.searchText) {
         this.searchResult = [];
+        this.searchResultTv = [];
       } else {
         // MOVIES REQUEST
         axios
