@@ -1,11 +1,9 @@
 <template>
   <div>
-    <input
-      type="text"
-      placeholder="Cerca..."
-      v-model="searchText"
-      @keyup="$emit('search', searchText)"
-    />
+    <input type="text" placeholder="Cerca..." v-model.trim="searchText" />
+    <button @click="emitSearch" @keyup.enter="emitSearch" class="my-3">
+      Cerca
+    </button>
   </div>
 </template>
 
@@ -16,6 +14,11 @@ export default {
     return {
       searchText: "",
     };
+  },
+  methods: {
+    emitSearch() {
+      this.$emit("search", this.searchText);
+    },
   },
 };
 </script>

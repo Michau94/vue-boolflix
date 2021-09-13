@@ -1,25 +1,17 @@
 <template>
-  <div class="container-lg">
+  <div class="container-lg ">
     <section v-if="showSections()" class="row">
-      <h2>Movies</h2>
-      <div class="col-6" v-for="result in searchResult" :key="result.id">
+      <div
+        class="col-6 col-lg-3"
+        v-for="result in combinedResult"
+        :key="result.id"
+      >
         <Card
-          :title="result.title"
-          :originalTitle="result.original_title"
+          :title="result.title || result.name"
+          :originalTitle="result.original_title || result.original_name"
           :originalLanguage="result.original_language"
           :voteAverage="result.vote_average"
-        />
-      </div>
-    </section>
-
-    <section v-if="showSections()" class="row">
-      <h2>Tv Series</h2>
-      <div class="col-6" v-for="serie in searchResultTv" :key="serie.id">
-        <Card
-          :title="serie.name"
-          :originalTitle="serie.original_name"
-          :originalLanguage="serie.original_language"
-          :voteAverage="serie.vote_average"
+          :posterPath="result.poster_path"
         />
       </div>
     </section>
@@ -33,7 +25,7 @@ export default {
   components: {
     Card,
   },
-  props: ["searchResult", "searchResultTv"],
+  props: ["searchResult", "searchResultTv", "combinedResult"],
   methods: {
     showSections() {
       return !this.searchResult || !this.searchResultTv ? false : true;
