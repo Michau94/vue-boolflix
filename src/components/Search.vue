@@ -1,7 +1,12 @@
 <template>
   <div>
-    <input type="text" placeholder="Cerca..." v-model.trim="searchText" />
-    <button @click="emitSearch" @keyup.enter="emitSearch" class="my-3">
+    <input
+      type="text"
+      placeholder="Cerca..."
+      v-model.trim="searchText"
+      @keyup.enter="emitSearch"
+    />
+    <button @click="emitSearch" class="my-3">
       Cerca
     </button>
   </div>

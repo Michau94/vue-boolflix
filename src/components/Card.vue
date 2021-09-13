@@ -3,8 +3,7 @@
     <div
       class="card"
       :style="{
-        backgroundImage:
-          'url(' + `https://image.tmdb.org/t/p/w500${posterPath}` + ')',
+        backgroundImage: getImage(),
       }"
     >
       <div class="content overflow-auto">
@@ -22,6 +21,7 @@
           />
         </figure>
         <h5>Voto:{{ Math.ceil(voteAverage / 2) }}</h5>
+        <p>{{ overview }}</p>
       </div>
     </div>
   </div>
@@ -29,6 +29,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      imgUrl:
+        "url(https://www.altavod.com/assets/images/poster-placeholder.png)",
+    };
+  },
   name: "Card",
   props: [
     "title",
@@ -36,7 +42,19 @@ export default {
     "originalLanguage",
     "voteAverage",
     "posterPath",
+    "overview",
   ],
+  methods: {
+    getImage() {
+      if (this.posterPath == null) {
+        return "url(https://www.altavod.com/assets/images/poster-placeholder.png)";
+      } else {
+        return (
+          "url(" + `https://image.tmdb.org/t/p/w500${this.posterPath}` + ")"
+        );
+      }
+    },
+  },
 };
 </script>
 
@@ -45,9 +63,12 @@ export default {
   height: 500px;
   position: relative;
   background-size: cover;
+  // background-image: url("https://www.altavod.com/assets/images/poster-placeholder.png");
   background-repeat: no-repeat;
   background-position: center;
   margin: 10px;
+  border-radius: 15px;
+  overflow: hidden;
 
   img {
     width: 40px;
@@ -59,7 +80,6 @@ export default {
   width: 100%;
   padding: 10px;
   background-size: cover;
-  border-radius: 15px;
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0;

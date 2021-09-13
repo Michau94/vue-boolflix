@@ -12,6 +12,7 @@
           :originalLanguage="result.original_language"
           :voteAverage="result.vote_average"
           :posterPath="result.poster_path"
+          :overview="result.overview"
         />
       </div>
     </section>
