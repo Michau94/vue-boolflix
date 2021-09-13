@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+import "@fontsource/open-sans/600.css";
+
 
 Vue.config.productionTip = false
 

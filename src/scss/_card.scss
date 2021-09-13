@@ -1,10 +1,11 @@
 .card-container {
   transform-style: preserve-3d;
-
-  &:hover {
-    animation: flips 2s ease-out;
+  &:hover .card {
+    transform: rotateY(180deg);
   }
+
   .card {
+    transition: transform 1s linear;
     height: 500px;
     position: relative;
     background-size: cover;
@@ -27,20 +28,12 @@
       opacity: 0;
       color: white;
       transition: opacity ease-out 1s;
-      transform: rotateY(360deg);
+      transform: rotateY(180deg);
 
       &:hover {
-        transform: rotateY(360deg);
         opacity: 1;
+        transition: opacity 1s;
         background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
-      }
-    }
-    @keyframes flips {
-      from {
-        transform: rotateY(180deg);
-      }
-      to {
-        transform: rotateY(360deg);
       }
     }
   }

@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-dark">
     <header
       class="container-flex d-flex align-items-center justify-content-around"
     >
-      <h2 class="text-light">Boolflix</h2>
+      <h2>Boolflix</h2>
 
       <div class="d-flex align-items-center">
         <select v-model="selectedGenre">
@@ -15,12 +15,14 @@
         <Search @search="find" />
       </div>
     </header>
-    <Content
-      :searchResult="searchResult"
-      :searchResultTv="searchResultTv"
-      :combinedResult="combinedResult"
-      :filteredResult="filtered"
-    />
+    <main class="h-100">
+      <Content
+        :searchResult="searchResult"
+        :searchResultTv="searchResultTv"
+        :combinedResult="combinedResult"
+        :filteredResult="filtered"
+      />
+    </main>
   </div>
 </template>
 

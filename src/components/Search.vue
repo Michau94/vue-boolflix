@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="d-flex align-items-center mx-2">
     <input
       type="text"
       placeholder="Cerca..."
       v-model.trim="searchText"
       @keyup.enter="emitSearch"
     />
-    <button @click="emitSearch" class="my-3">
+    <div @click="emitSearch" class="mx-3 btn btn-light">
       Cerca
-    </button>
+    </div>
   </div>
 </template>
 

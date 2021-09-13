@@ -7,8 +7,16 @@
       }"
     >
       <div class="content overflow-auto">
-        <h4>Titolo:{{ title }}</h4>
-        <h5>Titolo Originale:{{ originalTitle }}</h5>
+        <div>
+          {{ title }}
+          Titolo:
+          <h4>{{ title }}</h4>
+        </div>
+        {{ originalTitle }}
+        <div>
+          Titolo Originale:
+          <h4>{{ originalTitle }}</h4>
+        </div>
         <figure>
           Lingua:
           <img
