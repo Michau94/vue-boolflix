@@ -64,50 +64,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card-container {
-  transform-style: preserve-3d;
-  transform: rotate3d(-180deg);
-
-  &:hover {
-    animation: flips 1s ease-out;
-  }
-  .card {
-    height: 500px;
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 10px;
-    border-radius: 15px;
-    overflow: hidden;
-
-    img {
-      width: 40px;
-    }
-    .content {
-      height: 100%;
-      width: 100%;
-      padding: 10px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      opacity: 0;
-      color: white;
-      transition: opacity ease-in 1.5s;
-
-      &:hover {
-        opacity: 1;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
-      }
-    }
-    @keyframes flips {
-      50% {
-        transform: rotateY(0deg);
-      }
-      to {
-        transform: rotateY(180deg);
-      }
-    }
-  }
-}
+@import "../scss/card.scss";
 </style>

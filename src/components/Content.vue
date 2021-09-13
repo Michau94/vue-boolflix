@@ -3,7 +3,7 @@
     <section v-if="showSections()" class="row">
       <div
         class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-lg-2"
-        v-for="result in combinedResult"
+        v-for="result in filteredResult"
         :key="result.id"
       >
         <Card
@@ -26,7 +26,7 @@ export default {
   components: {
     Card,
   },
-  props: ["searchResult", "searchResultTv", "combinedResult"],
+  props: ["searchResult", "searchResultTv", "combinedResult", "filteredResult"],
   methods: {
     showSections() {
       return !this.searchResult || !this.searchResultTv ? false : true;
