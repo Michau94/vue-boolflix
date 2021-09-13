@@ -23,6 +23,7 @@ export default {
   methods: {
     emitSearch() {
       this.$emit("search", this.searchText);
+      this.searchText = " ";
     },
   },
 };

@@ -20,7 +20,8 @@
             :alt="originalLanguage"
           />
         </figure>
-        <h5>Voto:{{ Math.ceil(voteAverage / 2) }}</h5>
+        <RatingStar :rating="voteAverage" />
+        <h5>Voto:{{ voteAverage }}</h5>
         <p>{{ overview }}</p>
       </div>
     </div>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+import RatingStar from "./RatingStar.vue";
 export default {
   data() {
     return {
@@ -36,6 +38,9 @@ export default {
     };
   },
   name: "Card",
+  components: {
+    RatingStar,
+  },
   props: [
     "title",
     "originalTitle",
@@ -63,7 +68,6 @@ export default {
   height: 500px;
   position: relative;
   background-size: cover;
-  // background-image: url("https://www.altavod.com/assets/images/poster-placeholder.png");
   background-repeat: no-repeat;
   background-position: center;
   margin: 10px;
@@ -73,21 +77,20 @@ export default {
   img {
     width: 40px;
   }
-}
+  .content {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    color: white;
 
-.content {
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0;
-  color: white;
-
-  &:hover {
-    opacity: 1;
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+    &:hover {
+      opacity: 1;
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+    }
   }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="container-lg ">
+  <div class="container-md">
     <section v-if="showSections()" class="row">
       <div
-        class="col-6 col-lg-3"
+        class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-lg-2"
         v-for="result in combinedResult"
         :key="result.id"
       >
@@ -10,9 +10,9 @@
           :title="result.title || result.name"
           :originalTitle="result.original_title || result.original_name"
           :originalLanguage="result.original_language"
-          :voteAverage="result.vote_average"
+          :voteAverage="getRating(result.vote_average)"
           :posterPath="result.poster_path"
-          :overview="result.overview"
+          :overview="result.overview || 'No Overview...'"
         />
       </div>
     </section>
@@ -30,6 +30,9 @@ export default {
   methods: {
     showSections() {
       return !this.searchResult || !this.searchResultTv ? false : true;
+    },
+    getRating(vote) {
+      return Math.ceil(vote / 2);
     },
   },
 };

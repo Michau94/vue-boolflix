@@ -34,41 +34,42 @@ export default {
       searchResult: [],
       searchResultTv: [],
       searchText: " ",
+      api: {
+        baseUri: "https://api.themoviedb.org/3/",
+        apikey: "cde3eaa50ec9e14e90a124f80a98153d",
+      },
     };
   },
 
   // da trasformare in funzione al keyup
   methods: {
-    find(text) {
-      const apikey = "cde3eaa50ec9e14e90a124f80a98153d";
-      const baseUri = "https://api.themoviedb.org/3";
-
+    find(query) {
       // clean page if search empty
-      if (text === " " || !text) {
+      if (query === " " || !query) {
         this.searchResult = [];
         this.searchResultTv = [];
         return;
       }
 
       // MOVIES REQUEST
-      axios
-        .get(
-          `${baseUri}/search/movie?api_key=${apikey}&language=it&query=${text}`
-        )
-        .then((res) => {
-          this.searchResult = res.data.results;
-          console.log(this.searchResult);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
 
-      // TV SERIES REQUEST
+      this.fetchApi(query, "search/movie", "searchResult");
+      this.fetchApi(query, "search/tv", "searchResultTv");
+    },
+
+    fetchApi(query, endpoint, entity) {
+      const params = {
+        params: {
+          query,
+          api_key: this.api.apikey,
+          language: "it-IT",
+        },
+      };
       axios
-        .get(`${baseUri}/search/tv?api_key=${apikey}&language=it&query=${text}`)
+        .get(`${this.api.baseUri}${endpoint}`, params)
         .then((res) => {
-          this.searchResultTv = res.data.results;
-          console.log(this.searchResultTv);
+          this[entity] = res.data.results;
+          console.log(this.searchResult);
         })
         .catch((err) => {
           console.log(err);
