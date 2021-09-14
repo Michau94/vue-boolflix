@@ -31,6 +31,8 @@ export default {
     showSections() {
       return !this.searchResult || !this.searchResultTv ? false : true;
     },
+  },
+  computed: {
     getRating(vote) {
       return Math.ceil(vote / 2);
     },

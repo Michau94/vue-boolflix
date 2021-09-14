@@ -3,13 +3,17 @@
 @import "generics";
 
 header {
-  height: 80px;
+  height: 100px;
   background-color: $secondary;
   font-family: "Open Sans", sans-serif;
   font-weight: 500;
-  background-color: black;
 
   h2 {
     color: $primary-color;
+    text-transform: Uppercase;
   }
+}
+
+#app {
+  height: 100%;
 }

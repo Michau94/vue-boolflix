@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-items-center mx-2">
+  <div class="d-flex align-items-center mx-2 flex-wrap">
     <input
       type="text"
       placeholder="Cerca..."

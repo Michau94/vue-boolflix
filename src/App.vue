@@ -5,7 +5,7 @@
     >
       <h2>Boolflix</h2>
 
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center flex-wrap">
         <select v-model="selectedGenre">
           <option value="0">Tutti</option>
           <option :value="genre.id" v-for="(genre, idx) in genres" :key="idx">{{
@@ -15,7 +15,7 @@
         <Search @search="find" />
       </div>
     </header>
-    <main class="h-100">
+    <main>
       <Content
         :searchResult="searchResult"
         :searchResultTv="searchResultTv"
@@ -54,7 +54,7 @@ export default {
   created() {
     axios
       .get(
-        "https://api.themoviedb.org/3/genre/movie/list?api_key=cde3eaa50ec9e14e90a124f80a98153d&language=it"
+        `${this.api.baseUri}genre/movie/list?api_key=${this.api.apikey}&language=it`
       )
       .then((res) => {
         this.genres = res.data.genres;

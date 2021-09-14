@@ -8,11 +8,9 @@
     >
       <div class="content overflow-auto">
         <div>
-          {{ title }}
           Titolo:
           <h4>{{ title }}</h4>
         </div>
-        {{ originalTitle }}
         <div>
           Titolo Originale:
           <h4>{{ originalTitle }}</h4>
