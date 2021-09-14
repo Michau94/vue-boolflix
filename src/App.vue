@@ -17,10 +17,14 @@
     </header>
     <main>
       <Content
-        :searchResult="searchResult"
-        :searchResultTv="searchResultTv"
-        :combinedResult="combinedResult"
-        :filteredResult="filtered"
+        v-if="this.searchResult.length > 0"
+        title="Movies"
+        :results="filtered('searchResult')"
+      />
+      <Content
+        v-if="this.searchResultTv.length > 0"
+        title="Series"
+        :results="filtered('searchResultTv')"
       />
     </main>
   </div>
@@ -93,15 +97,9 @@ export default {
           console.log(err);
         });
     },
-  },
 
-  computed: {
-    combinedResult() {
-      return [...this.searchResult, ...this.searchResultTv];
-    },
-
-    filtered() {
-      let filtered = this.combinedResult;
+    filtered(entity) {
+      let filtered = this[entity];
 
       let newArr = [];
       filtered.forEach((film) => {
