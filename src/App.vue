@@ -1,45 +1,35 @@
 <template>
-  <div id="app" class="bg-dark">
-    <header
-      class="container-flex d-flex align-items-center justify-content-around"
-    >
-      <h2>Boolflix</h2>
+  <div id="app">
+    <Header @search="find" :api="api" @filter="setFilter" />
 
-      <div class="d-flex align-items-center flex-wrap">
-        <select v-model="selectedGenre">
-          <option value="0">Tutti</option>
-          <option :value="genre.id" v-for="(genre, idx) in genres" :key="idx">{{
-            genre.name
-          }}</option>
-        </select>
-        <Search @search="find" />
-      </div>
-    </header>
     <main>
-      <Content
-        v-if="this.searchResult.length > 0"
-        title="Movies"
-        :results="filtered('searchResult')"
-      />
-      <Content
-        v-if="this.searchResultTv.length > 0"
-        title="Series"
-        :results="filtered('searchResultTv')"
-      />
+      <Welcome
+        message="Trova i tuoi film preferiti con BoolFlix..."
+        v-if="searching"
+      >
+        <i class="fas fa-film fa-2x fa-spin" />
+      </Welcome>
+
+      <div v-else>
+        <Content title="Movies" :results="filtered('searchResult')" />
+        <Content title="Series" :results="filtered('searchResultTv')" />
+      </div>
     </main>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Search from "./components/Search.vue";
+import Header from "./components/Header.vue";
 import Content from "./components/Content.vue";
+import Welcome from "./components/Welcome.vue";
 
 export default {
   name: "App",
   components: {
-    Search,
     Content,
+    Header,
+    Welcome,
   },
   data() {
     return {
@@ -50,25 +40,15 @@ export default {
         baseUri: "https://api.themoviedb.org/3/",
         apikey: "cde3eaa50ec9e14e90a124f80a98153d",
       },
-      genres: [],
-      selectedGenre: 0,
+      actualFilter: 0,
+      searching: true,
     };
-  },
-
-  created() {
-    axios
-      .get(
-        `${this.api.baseUri}genre/movie/list?api_key=${this.api.apikey}&language=it`
-      )
-      .then((res) => {
-        this.genres = res.data.genres;
-      })
-      .catch((err) => console.log(err));
   },
 
   methods: {
     find(query) {
       // clean page if search empty
+      console.log(query);
       if (query === " " || !query) {
         this.searchResult = [];
         this.searchResultTv = [];
@@ -91,30 +71,29 @@ export default {
         .get(`${this.api.baseUri}${endpoint}`, params)
         .then((res) => {
           this[entity] = res.data.results;
-          console.log(this.searchResult);
+          this.searching = false;
         })
         .catch((err) => {
           console.log(err);
         });
     },
 
+    setFilter(genre) {
+      this.actualFilter = genre;
+      console.log(this.actualFilter);
+    },
+
     filtered(entity) {
-      let filtered = this[entity];
+      let result = this[entity];
 
-      let newArr = [];
-      filtered.forEach((film) => {
-        if (this.selectedGenre == 0) {
-          newArr = filtered;
-        }
-
-        if (film.genre_ids.includes(this.selectedGenre)) {
-          newArr.push(film);
-        }
+      if (this.actualFilter == 0) {
+        return result;
+      }
+      const filtered = result.filter((film) => {
+        return film.genre_ids.includes(this.actualFilter);
       });
 
-      console.log(newArr);
-
-      return newArr;
+      return filtered;
     },
   },
 };

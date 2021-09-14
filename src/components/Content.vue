@@ -1,7 +1,7 @@
 <template>
-  <div class="container-md">
-    <section class="row m-3">
-      <h2 class="text-white">{{ title }}</h2>
+  <div class="container-md h-100">
+    <section class="row m-3" v-if="results.length > 0">
+      <h2 class="text-white p-4">{{ title }}</h2>
       <div
         class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-lg-2"
         v-for="result in results"
@@ -17,6 +17,12 @@
         />
       </div>
     </section>
+    <h4
+      v-else
+      class="text-light d-flex justify-content-center align-items-center"
+    >
+      No Mathces Found!
+    </h4>
   </div>
 </template>
 

@@ -6,7 +6,7 @@
       v-model.trim="searchText"
       @keyup.enter="emitSearch"
     />
-    <div @click="emitSearch" class="mx-3 btn btn-light">
+    <div @click="emitSearch" class="mx-3 btn btn-danger">
       Cerca
     </div>
   </div>
